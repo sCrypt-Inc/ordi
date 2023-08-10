@@ -38,11 +38,11 @@ const utxo = {
     vout: utxos[0].outputIndex,
 };
 
-
+// hello world in base64 format
 const fireShard = "aGVsbG8gd29ybGQ=";
 
 
-const ordinalDestinationAddress  = "mqe2d39Yb8UdA6mowX9iWMdcRFYXrNQMje";
+const ordinalDestinationAddress  = ordAddress.to_string();
 
 
 // inscription
