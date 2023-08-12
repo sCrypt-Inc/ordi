@@ -5,23 +5,25 @@ import { DefaultProvider,bsv } from "scrypt-ts";
 
 import * as dotenv from "dotenv";
 
+import fs from 'fs';
+
 const satPerByteFee = 0.5;
 dotenv.config()
 
 
 const paymentPk = PrivateKey.from_wif(process.env.PRIVATEKEY_PAYMENT);
-const paymentAddress = paymentPk.to_public_key().to_address().set_chain_params(ChainParams.testnet());
+const paymentAddress = paymentPk.to_public_key().to_address()
 
 
 const ordPk = PrivateKey.from_wif(process.env.PRIVATEKEY_ORD);
-const ordAddress = ordPk.to_public_key().to_address().set_chain_params(ChainParams.testnet());
+const ordAddress = ordPk.to_public_key().to_address()
 
 
 
 
 
 const provider = new DefaultProvider({
-    network: bsv.Networks.testnet
+    network: bsv.Networks.mainnet
 });
 
 await provider.connect();
@@ -39,14 +41,13 @@ const utxo = {
 };
 
 // hello world in base64 format
-const fireShard = "aGVsbG8gd29ybGQ=";
-
+const logo = fs.readFileSync("./scrypt-logo.png").toString('base64');
 
 const ordinalDestinationAddress  = ordAddress.to_string();
 
 
 // inscription
-const inscription =  { dataB64: fireShard,  contentType: "text"}
+const inscription =  { dataB64: logo,  contentType: "image/png"}
 
 const tx = await createOrdinal(utxo, ordinalDestinationAddress, paymentPk, paymentAddress.to_string(), satPerByteFee, inscription);
 
