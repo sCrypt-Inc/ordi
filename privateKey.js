@@ -14,7 +14,7 @@ function genPrivKey() {
   console.log(`Missing private key, generating a new one ...
 Private key generated: '${newPrivKey.toWIF()}'
 You can fund its address '${newPrivKey.toAddress()}' from some faucet and use it to complete the test
-Example faucets are https://faucet.bitcoincloud.net and https://testnet.satoshisvision.network`)
+Example faucets are https://scrypt.io/faucet`)
   exit(0)
 }
 
