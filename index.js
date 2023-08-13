@@ -2,20 +2,18 @@ import { createOrdinal, sendOrdinal, sendUtxos } from 'js-1sat-ord'
 import { P2PKHAddress, PrivateKey, Script, Transaction, ChainParams } from "bsv-wasm";
 
 import { DefaultProvider,bsv } from "scrypt-ts";
-
-import * as dotenv from "dotenv";
-
 import fs from 'fs';
 
 const satPerByteFee = 0.5;
-dotenv.config()
+
+const wallet = JSON.parse(fs.readFileSync("./wallet.json").toString());
 
 
-const paymentPk = PrivateKey.from_wif(process.env.PRIVATEKEY_PAYMENT);
+const paymentPk = PrivateKey.from_wif(wallet.payPk);
 const paymentAddress = paymentPk.to_public_key().to_address()
 
 
-const ordPk = PrivateKey.from_wif(process.env.PRIVATEKEY_ORD);
+const ordPk = PrivateKey.from_wif(wallet.ordPk);
 const ordAddress = ordPk.to_public_key().to_address()
 
 
